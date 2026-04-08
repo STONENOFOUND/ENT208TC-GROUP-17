@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Log</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>ENT208</h2>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="activity.html" class="active">Activity Log</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1>Night Activity Log</h1>
+        <p>Recorded motion and bed-exit events during the night</p>
+      </header>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Total Activities</h3>
+          <p id="totalActivities">6</p>
+        </div>
+        <div class="card">
+          <h3>Bed Exits</h3>
+          <p id="bedExits">2</p>
+        </div>
+        <div class="card">
+          <h3>No Activity Periods</h3>
+          <p id="inactivePeriods">3</p>
+        </div>
+        <div class="card">
+          <h3>Last Event</h3>
+          <p id="lastEvent">06:55</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Filter</h2>
+        <div class="filter-row">
+          <label for="timeFilter">Time Range:</label>
+          <select id="timeFilter">
+            <option value="all">All Night</option>
+            <option value="00-03">00:00 - 03:00</option>
+            <option value="03-06">03:00 - 06:00</option>
+            <option value="06-09">06:00 - 09:00</option>
+          </select>
+
+          <label for="statusFilter">Status:</label>
+          <select id="statusFilter">
+            <option value="all">All</option>
+            <option value="Activity detected">Activity detected</option>
+            <option value="No activity">No activity</option>
+            <option value="Bed exit">Bed exit</option>
+          </select>
+
+          <button class="btn" onclick="applyFilter()">Apply</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Activity Records</h2>
+          <div class="button-group">
+            <button class="btn secondary" onclick="exportLogs()">Export</button>
+            <button class="btn danger" onclick="clearLogs()">Clear</button>
+          </div>
+        </div>
+
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody">
+            <tr>
+              <td>02:15</td>
+              <td><span class="badge active-badge">Activity detected</span></td>
+              <td>Bedside</td>
+            </tr>
+            <tr>
+              <td>03:08</td>
+              <td><span class="badge inactive-badge">No activity</span></td>
+              <td>Bedroom</td>
+            </tr>
+            <tr>
+              <td>03:40</td>
+              <td><span class="badge warning-badge">Bed exit</span></td>
+              <td>Bed</td>
+            </tr>
+            <tr>
+              <td>04:25</td>
+              <td><span class="badge active-badge">Activity detected</span></td>
+              <td>Bedside</td>
+            </tr>
+            <tr>
+              <td>05:10</td>
+              <td><span class="badge inactive-badge">No activity</span></td>
+              <td>Bedroom</td>
+            </tr>
+            <tr>
+              <td>06:55</td>
+              <td><span class="badge warning-badge">Bed exit</span></td>
+              <td>Bed</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

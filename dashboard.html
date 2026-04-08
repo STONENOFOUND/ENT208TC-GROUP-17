@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elderly Monitoring Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>ENT208</h2>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="activity.html">Activity Log</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1>Elderly Get-Up Detection System</h1>
+        <p>Real-time bedroom monitoring interface</p>
+      </header>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Motion Status</h3>
+          <p id="motionStatus">Detecting</p>
+        </div>
+        <div class="card">
+          <h3>Temperature</h3>
+          <p id="temperature">24°C</p>
+        </div>
+        <div class="card">
+          <h3>Humidity</h3>
+          <p id="humidity">56%</p>
+        </div>
+        <div class="card">
+          <h3>Night Light</h3>
+          <p id="lightStatus">ON</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Live Status</h2>
+        <p><strong>Bed Occupancy:</strong> <span id="bedStatus">Occupied</span></p>
+        <p><strong>Last Update:</strong> <span id="lastUpdate">07:42</span></p>
+      </section>
+
+      <section class="panel">
+        <h2>Recent Activity</h2>
+        <ul id="activityList">
+          <li>02:15 - Activity detected</li>
+          <li>03:08 - No activity</li>
+          <li>06:55 - Activity detected</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
