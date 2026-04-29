@@ -1,101 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="settings.pageTitle">Settings</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <div class="container">
-    <aside class="sidebar">
-      <h2>ENT208</h2>
-      <nav>
-        <ul>
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="activity.html">Activity Log</a></li>
-          <li><a href="settings.html" class="active">Settings</a></li>
-        </ul>
-      </nav>
-    </aside>
+<body data-page="settings">
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="header-main">
+        <p class="eyebrow" data-i18n="settings.eyebrow">Configuration</p>
+        <h1 data-i18n="settings.title">System Settings</h1>
+        <p class="subtext" data-i18n="settings.subtitle">
+          Configure night light, motion detection, and environmental thresholds
+        </p>
 
-    <main class="main-content">
-      <header class="topbar">
-        <h1>System Settings</h1>
-        <p>Configure night light, motion detection, and environmental thresholds</p>
-      </header>
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">中文</button>
+        </div>
+      </div>
 
-      <section class="panel">
-        <h2>Night Light Settings</h2>
-        <div class="setting-item">
-          <label for="lightToggle">Night Light</label>
-          <input type="checkbox" id="lightToggle" checked>
+      <div class="header-side">
+        <div class="header-badge muted-badge" data-i18n="common.set">SET</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="settings.nightLightSettings">Night Light Settings</h2>
         </div>
 
         <div class="setting-item">
-          <label for="sensitivityRange">Motion Sensitivity</label>
-          <input type="range" id="sensitivityRange" min="1" max="10" value="7" oninput="updateSensitivityValue(this.value)">
-          <span id="sensitivityValue">7</span>
+          <div>
+            <label for="lightToggle" data-i18n="settings.nightLight">Night Light</label>
+            <p class="helper-text no-top" data-i18n="settings.nightLightHelp">
+              Turn the night light on or off.
+            </p>
+          </div>
+          <input type="checkbox" id="lightToggle" checked />
         </div>
 
-        <div class="setting-item">
-          <label for="delaySelect">Light-off Delay</label>
-          <select id="delaySelect">
-            <option>2 minutes</option>
-            <option selected>3 minutes</option>
-            <option>4 minutes</option>
-            <option>5 minutes</option>
-          </select>
+        <div class="setting-item column">
+          <div class="setting-row">
+            <label for="sensitivityRange" data-i18n="settings.motionSensitivity">Motion Sensitivity</label>
+            <span class="range-value" id="sensitivityValue">7</span>
+          </div>
+          <input
+            type="range"
+            id="sensitivityRange"
+            min="1"
+            max="10"
+            value="7"
+            oninput="updateSensitivityValue(this.value)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="delayMinutes" data-i18n="settings.lightOffDelay">Light-off Delay</label>
+          <input
+            type="number"
+            id="delayMinutes"
+            class="input"
+            min="1"
+            max="120"
+            step="1"
+            value="3"
+          />
+          <p class="helper-text no-top" data-i18n="settings.lightOffDelayHelp">
+            Enter the delay time in minutes.
+          </p>
         </div>
       </section>
 
-      <section class="panel">
-        <h2>Temperature & Humidity Thresholds</h2>
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="settings.thresholds">Temperature & Humidity Thresholds</h2>
+        </div>
+
         <div class="setting-grid">
-          <div class="setting-item">
-            <label for="tempLow">Min Temperature (°C)</label>
-            <input type="number" id="tempLow" value="18">
+          <div class="form-group">
+            <label for="tempLow" data-i18n="settings.minTemp">Min Temperature (°C)</label>
+            <input type="number" id="tempLow" class="input" value="18" />
           </div>
-          <div class="setting-item">
-            <label for="tempHigh">Max Temperature (°C)</label>
-            <input type="number" id="tempHigh" value="28">
+
+          <div class="form-group">
+            <label for="tempHigh" data-i18n="settings.maxTemp">Max Temperature (°C)</label>
+            <input type="number" id="tempHigh" class="input" value="28" />
           </div>
-          <div class="setting-item">
-            <label for="humidityLow">Min Humidity (%)</label>
-            <input type="number" id="humidityLow" value="40">
+
+          <div class="form-group">
+            <label for="humidityLow" data-i18n="settings.minHumidity">Min Humidity (%)</label>
+            <input type="number" id="humidityLow" class="input" value="40" />
           </div>
-          <div class="setting-item">
-            <label for="humidityHigh">Max Humidity (%)</label>
-            <input type="number" id="humidityHigh" value="70">
+
+          <div class="form-group">
+            <label for="humidityHigh" data-i18n="settings.maxHumidity">Max Humidity (%)</label>
+            <input type="number" id="humidityHigh" class="input" value="70" />
           </div>
         </div>
       </section>
 
-      <section class="panel">
-        <h2>Indicator Mode</h2>
-        <div class="setting-item">
-          <label for="indicatorMode">Light Indication Mode</label>
-          <select id="indicatorMode">
-            <option selected>Normal Mode</option>
-            <option>Sleep-friendly Mode</option>
-            <option>Alert Priority Mode</option>
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="settings.indicatorMode">Indicator Mode</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="indicatorMode" data-i18n="settings.lightIndicationMode">Light Indication Mode</label>
+          <select id="indicatorMode" class="input">
+            <option value="normal" data-i18n="settings.mode.normal">Normal Mode</option>
+            <option value="sleep" data-i18n="settings.mode.sleep">Sleep-friendly Mode</option>
+            <option value="alert" data-i18n="settings.mode.alert">Alert Priority Mode</option>
           </select>
         </div>
 
         <div class="setting-item">
-          <label for="abnormalReminder">Abnormal Status Reminder</label>
-          <input type="checkbox" id="abnormalReminder" checked>
+          <div>
+            <label for="abnormalReminder" data-i18n="settings.abnormalReminder">Abnormal Status Reminder</label>
+            <p class="helper-text no-top" data-i18n="settings.abnormalReminderHelp">
+              Show reminder when readings go outside the safe range.
+            </p>
+          </div>
+          <input type="checkbox" id="abnormalReminder" checked />
         </div>
       </section>
 
-      <section class="panel">
-        <div class="panel-header">
-          <h2>Save Configuration</h2>
-          <button class="btn" onclick="saveSettings()">Save Settings</button>
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="settings.saveConfiguration">Save Configuration</h2>
         </div>
+
+        <div class="button-row">
+          <button class="btn" onclick="saveSettings()" data-i18n="settings.saveSettings">
+            Save Settings
+          </button>
+        </div>
+
         <p id="saveMessage" class="save-message"></p>
       </section>
     </main>
+
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-link">
+        <span class="nav-icon">⌂</span>
+        <span data-i18n="nav.dashboard">Dashboard</span>
+      </a>
+      <a href="activity.html" class="nav-link">
+        <span class="nav-icon">≣</span>
+        <span data-i18n="nav.activity">Activity</span>
+      </a>
+      <a href="settings.html" class="nav-link active">
+        <span class="nav-icon">⚙</span>
+        <span data-i18n="nav.settings">Settings</span>
+      </a>
+    </nav>
   </div>
 
   <script src="js/script.js"></script>

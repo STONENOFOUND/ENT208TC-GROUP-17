@@ -1,124 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity Log</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title data-i18n="activity.pageTitle">Activity Log</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body[data-page="activity"] .app-shell {
+      padding: 12px 12px 112px;
+      max-width: 430px;
+    }
+
+    body[data-page="activity"] .app-header {
+      margin-bottom: 12px;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    body[data-page="activity"] .app-header h1 {
+      font-size: 24px;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+
+    body[data-page="activity"] .subtext {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    body[data-page="activity"] .lang-switch {
+      margin-top: 8px;
+      gap: 6px;
+    }
+
+    body[data-page="activity"] .lang-btn {
+      padding: 7px 10px;
+      font-size: 12px;
+      min-width: 56px;
+    }
+
+    body[data-page="activity"] .header-badge {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+
+    body[data-page="activity"] .page-content {
+      gap: 12px;
+    }
+
+    body[data-page="activity"] .stat-grid {
+      gap: 8px;
+    }
+
+    body[data-page="activity"] .stat-card,
+    body[data-page="activity"] .section-card {
+      padding: 14px 12px;
+    }
+
+    body[data-page="activity"] .stat-card h3 {
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    body[data-page="activity"] .stat-card p {
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    body[data-page="activity"] .section-header {
+      margin-bottom: 10px;
+    }
+
+    body[data-page="activity"] .section-header h2 {
+      font-size: 16px;
+    }
+
+    body[data-page="activity"] .filter-grid {
+      gap: 10px;
+    }
+
+    body[data-page="activity"] .form-group {
+      gap: 6px;
+    }
+
+    body[data-page="activity"] .form-group label {
+      font-size: 13px;
+    }
+
+    body[data-page="activity"] .input,
+    body[data-page="activity"] select {
+      padding: 10px 12px;
+      font-size: 14px;
+      border-radius: 10px;
+    }
+
+    body[data-page="activity"] .button-row.top-gap,
+    body[data-page="activity"] .button-row.compact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    body[data-page="activity"] .button-row .btn {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      border-radius: 12px;
+    }
+
+    body[data-page="activity"] .helper-text {
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    body[data-page="activity"] .log-table-wrap {
+      max-height: 250px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 14px;
+    }
+
+    body[data-page="activity"] .log-table {
+      min-width: 100%;
+    }
+
+    body[data-page="activity"] .log-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #f8fbfc;
+    }
+
+    body[data-page="activity"] .log-table th,
+    body[data-page="activity"] .log-table td {
+      padding: 10px 8px;
+      font-size: 13px;
+    }
+
+    body[data-page="activity"] .badge {
+      padding: 6px 9px;
+      font-size: 11px;
+    }
+
+    body[data-page="activity"] .bottom-nav {
+      z-index: 9999;
+      padding-top: 10px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+
+    body[data-page="activity"] .nav-link {
+      padding: 9px 6px;
+      font-size: 11px;
+    }
+
+    body[data-page="activity"] .nav-icon {
+      font-size: 16px;
+    }
+
+    @media (max-width: 390px) {
+      body[data-page="activity"] .app-shell {
+        padding: 10px 10px 114px;
+      }
+
+      body[data-page="activity"] .app-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      body[data-page="activity"] .header-side {
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      body[data-page="activity"] .stat-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      body[data-page="activity"] .button-row.top-gap,
+      body[data-page="activity"] .button-row.compact {
+        grid-template-columns: 1fr;
+      }
+
+      body[data-page="activity"] .log-table-wrap {
+        max-height: 220px;
+      }
+    }
+
+    @media (max-width: 350px) {
+      body[data-page="activity"] .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      body[data-page="activity"] .app-header h1 {
+        font-size: 22px;
+      }
+
+      body[data-page="activity"] .log-table th,
+      body[data-page="activity"] .log-table td {
+        font-size: 12px;
+        padding: 9px 7px;
+      }
+    }
+  </style>
 </head>
-<body>
-  <div class="container">
-    <aside class="sidebar">
-      <h2>ENT208</h2>
-      <nav>
-        <ul>
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="activity.html" class="active">Activity Log</a></li>
-          <li><a href="settings.html">Settings</a></li>
-        </ul>
-      </nav>
-    </aside>
+<body data-page="activity">
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="header-main">
+        <p class="eyebrow" data-i18n="activity.eyebrow">Night Activity</p>
+        <h1 data-i18n="activity.title">Activity Log</h1>
+        <p class="subtext" data-i18n="activity.subtitle">Recorded motion and bed-exit events during the night</p>
 
-    <main class="main-content">
-      <header class="topbar">
-        <h1>Night Activity Log</h1>
-        <p>Recorded motion and bed-exit events during the night</p>
-      </header>
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">中文</button>
+        </div>
+      </div>
 
-      <section class="cards">
-        <div class="card">
-          <h3>Total Activities</h3>
+      <div class="header-side">
+        <div class="header-badge muted-badge" data-i18n="common.log">LOG</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <section class="stat-grid">
+        <div class="card stat-card">
+          <h3 data-i18n="activity.totalActivities">Total Activities</h3>
           <p id="totalActivities">6</p>
         </div>
-        <div class="card">
-          <h3>Bed Exits</h3>
+        <div class="card stat-card">
+          <h3 data-i18n="activity.bedExits">Bed Exits</h3>
           <p id="bedExits">2</p>
         </div>
-        <div class="card">
-          <h3>No Activity Periods</h3>
+        <div class="card stat-card">
+          <h3 data-i18n="activity.noActivityPeriods">No Activity Periods</h3>
           <p id="inactivePeriods">3</p>
         </div>
-        <div class="card">
-          <h3>Last Event</h3>
+        <div class="card stat-card">
+          <h3 data-i18n="activity.lastEvent">Last Event</h3>
           <p id="lastEvent">06:55</p>
         </div>
       </section>
 
-      <section class="panel">
-        <h2>Filter</h2>
-        <div class="filter-row">
-          <label for="timeFilter">Time Range:</label>
-          <select id="timeFilter">
-            <option value="all">All Night</option>
-            <option value="00-03">00:00 - 03:00</option>
-            <option value="03-06">03:00 - 06:00</option>
-            <option value="06-09">06:00 - 09:00</option>
-          </select>
-
-          <label for="statusFilter">Status:</label>
-          <select id="statusFilter">
-            <option value="all">All</option>
-            <option value="Activity detected">Activity detected</option>
-            <option value="No activity">No activity</option>
-            <option value="Bed exit">Bed exit</option>
-          </select>
-
-          <button class="btn" onclick="applyFilter()">Apply</button>
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="activity.filter">Filter</h2>
         </div>
-      </section>
 
-      <section class="panel">
-        <div class="panel-header">
-          <h2>Activity Records</h2>
-          <div class="button-group">
-            <button class="btn secondary" onclick="exportLogs()">Export</button>
-            <button class="btn danger" onclick="clearLogs()">Clear</button>
+        <div class="filter-grid">
+          <div class="form-group">
+            <label for="timeFilter" data-i18n="activity.timeRange">Time Range</label>
+            <select id="timeFilter" class="input">
+              <option value="all" data-i18n="activity.option.allNight">All Night</option>
+              <option value="00-03" data-i18n="activity.option.range00_03">00:00 - 03:00</option>
+              <option value="03-06" data-i18n="activity.option.range03_06">03:00 - 06:00</option>
+              <option value="06-09" data-i18n="activity.option.range06_09">06:00 - 09:00</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="statusFilter" data-i18n="activity.status">Status</label>
+            <select id="statusFilter" class="input">
+              <option value="all" data-i18n="activity.option.statusAll">All</option>
+              <option value="activityDetected" data-i18n="status.activityDetected">Activity detected</option>
+              <option value="noActivity" data-i18n="status.noActivity">No activity</option>
+              <option value="bedExit" data-i18n="status.bedExit">Bed exit</option>
+            </select>
           </div>
         </div>
 
-        <table class="log-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Status</th>
-              <th>Location</th>
-            </tr>
-          </thead>
-          <tbody id="logTableBody">
-            <tr>
-              <td>02:15</td>
-              <td><span class="badge active-badge">Activity detected</span></td>
-              <td>Bedside</td>
-            </tr>
-            <tr>
-              <td>03:08</td>
-              <td><span class="badge inactive-badge">No activity</span></td>
-              <td>Bedroom</td>
-            </tr>
-            <tr>
-              <td>03:40</td>
-              <td><span class="badge warning-badge">Bed exit</span></td>
-              <td>Bed</td>
-            </tr>
-            <tr>
-              <td>04:25</td>
-              <td><span class="badge active-badge">Activity detected</span></td>
-              <td>Bedside</td>
-            </tr>
-            <tr>
-              <td>05:10</td>
-              <td><span class="badge inactive-badge">No activity</span></td>
-              <td>Bedroom</td>
-            </tr>
-            <tr>
-              <td>06:55</td>
-              <td><span class="badge warning-badge">Bed exit</span></td>
-              <td>Bed</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="button-row top-gap">
+          <button class="btn" onclick="applyFilter()" data-i18n="activity.applyFilter">Apply Filter</button>
+          <button class="btn secondary" onclick="resetFilter()" data-i18n="activity.reset">Reset</button>
+        </div>
+
+        <p id="filterResultText" class="helper-text"></p>
+      </section>
+
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="activity.records">Activity Records</h2>
+          <div class="button-row compact">
+            <button class="btn secondary" onclick="exportLogs()" data-i18n="activity.exportCsv">Export CSV</button>
+            <button class="btn danger" onclick="clearLogs()" data-i18n="activity.clearLogs">Clear Logs</button>
+          </div>
+        </div>
+
+        <div class="log-table-wrap">
+          <table class="log-table">
+            <thead>
+              <tr>
+                <th data-i18n="activity.table.time">Time</th>
+                <th data-i18n="activity.table.status">Status</th>
+                <th data-i18n="activity.table.location">Location</th>
+              </tr>
+            </thead>
+            <tbody id="logTableBody">
+              <tr>
+                <td>02:15</td>
+                <td><span class="badge active-badge">Activity detected</span></td>
+                <td>Bedside</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
+
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-link">
+        <span class="nav-icon">⌂</span>
+        <span data-i18n="nav.dashboard">Dashboard</span>
+      </a>
+      <a href="activity.html" class="nav-link active">
+        <span class="nav-icon">≣</span>
+        <span data-i18n="nav.activity">Activity</span>
+      </a>
+      <a href="settings.html" class="nav-link">
+        <span class="nav-icon">⚙</span>
+        <span data-i18n="nav.settings">Settings</span>
+      </a>
+    </nav>
   </div>
 
   <script src="js/script.js"></script>

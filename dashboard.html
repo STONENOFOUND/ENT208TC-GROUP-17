@@ -1,64 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elderly Monitoring Dashboard</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="dashboard.pageTitle">ElderCare Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <div class="container">
-    <aside class="sidebar">
-      <h2>ENT208</h2>
-      <nav>
-        <ul>
-          <li><a href="dashboard.html" class="active">Dashboard</a></li>
-          <li><a href="activity.html">Activity Log</a></li>
-          <li><a href="settings.html">Settings</a></li>
-        </ul>
-      </nav>
-    </aside>
+<body data-page="dashboard">
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="header-main">
+        <p class="eyebrow" data-i18n="common.brand">ElderCare SafeNight</p>
+        <h1 data-i18n="dashboard.title">Elderly Get-Up Detection</h1>
+        <p class="subtext" data-i18n="dashboard.subtitle">Real-time bedroom monitoring interface</p>
 
-    <main class="main-content">
-      <header class="topbar">
-        <h1>Elderly Get-Up Detection System</h1>
-        <p>Real-time bedroom monitoring interface</p>
-      </header>
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">中文</button>
+        </div>
+      </div>
 
-      <section class="cards">
-        <div class="card">
-          <h3>Motion Status</h3>
+      <div class="header-side">
+        <div class="header-badge" data-i18n="common.live">LIVE</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <section class="hero-card">
+        <div class="hero-text">
+          <p class="eyebrow hero-eyebrow" data-i18n="dashboard.heroEyebrow">System Overview</p>
+          <h2 data-i18n="dashboard.heroTitle">Bedroom monitoring is running normally</h2>
+          <p data-i18n="dashboard.heroDescription">
+            Track motion, bed occupancy, temperature, humidity, and night-light status in one simple mobile view.
+          </p>
+        </div>
+        <div class="hero-status">
+          <span class="status-dot"></span>
+          <span data-i18n="common.systemActive">System Active</span>
+        </div>
+      </section>
+
+      <section class="stat-grid">
+        <div class="card stat-card">
+          <h3 data-i18n="dashboard.motionStatus">Motion Status</h3>
           <p id="motionStatus">Detecting</p>
         </div>
-        <div class="card">
-          <h3>Temperature</h3>
+        <div class="card stat-card">
+          <h3 data-i18n="dashboard.temperature">Temperature</h3>
           <p id="temperature">24°C</p>
         </div>
-        <div class="card">
-          <h3>Humidity</h3>
+        <div class="card stat-card">
+          <h3 data-i18n="dashboard.humidity">Humidity</h3>
           <p id="humidity">56%</p>
         </div>
-        <div class="card">
-          <h3>Night Light</h3>
+        <div class="card stat-card">
+          <h3 data-i18n="dashboard.nightLight">Night Light</h3>
           <p id="lightStatus">ON</p>
         </div>
       </section>
 
-      <section class="panel">
-        <h2>Live Status</h2>
-        <p><strong>Bed Occupancy:</strong> <span id="bedStatus">Occupied</span></p>
-        <p><strong>Last Update:</strong> <span id="lastUpdate">07:42</span></p>
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="dashboard.liveStatus">Live Status</h2>
+          <span class="chip chip-success" data-i18n="common.connected">Connected</span>
+        </div>
+
+        <div class="info-list">
+          <div class="info-row">
+            <span class="info-label" data-i18n="dashboard.bedOccupancy">Bed Occupancy</span>
+            <strong id="bedStatus">Occupied</strong>
+          </div>
+          <div class="info-row">
+            <span class="info-label" data-i18n="dashboard.lastUpdate">Last Update</span>
+            <strong id="lastUpdate">07:42</strong>
+          </div>
+        </div>
       </section>
 
-      <section class="panel">
-        <h2>Recent Activity</h2>
-        <ul id="activityList">
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="dashboard.recentActivity">Recent Activity</h2>
+          <a class="text-link" href="activity.html" data-i18n="common.viewAll">View all</a>
+        </div>
+
+        <ul id="activityList" class="activity-list">
           <li>02:15 - Activity detected</li>
           <li>03:08 - No activity</li>
           <li>06:55 - Activity detected</li>
         </ul>
       </section>
+
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 data-i18n="dashboard.quickActions">Quick Actions</h2>
+        </div>
+
+        <div class="button-row">
+          <a class="btn" href="activity.html" data-i18n="dashboard.openActivityLog">Open Activity Log</a>
+          <a class="btn secondary" href="settings.html" data-i18n="dashboard.openSettings">Open Settings</a>
+        </div>
+      </section>
     </main>
+
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-link active">
+        <span class="nav-icon">⌂</span>
+        <span data-i18n="nav.dashboard">Dashboard</span>
+      </a>
+      <a href="activity.html" class="nav-link">
+        <span class="nav-icon">≣</span>
+        <span data-i18n="nav.activity">Activity</span>
+      </a>
+      <a href="settings.html" class="nav-link">
+        <span class="nav-icon">⚙</span>
+        <span data-i18n="nav.settings">Settings</span>
+      </a>
+    </nav>
   </div>
 
   <script src="js/script.js"></script>
